@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import usePushNotifications from "./hooks/usePushNotifications"
+import subscribeToPushMessages from "./utils/subscribe";
 
 function App() {
+  const { permission, handlePermission } = usePushNotifications();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>permission: {permission}</div>
+      <div>
+        <button onClick={handlePermission}>request permission</button>
+      </div>
+      <div>
+        <button onClick={subscribeToPushMessages}>订阅n</button>
+      </div>
     </div>
   );
 }
