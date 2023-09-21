@@ -30,16 +30,17 @@ async function subscribeToPushMessages() {
     // const key = subscription.getKey("p256dh");
     // const auth = subscription.getKey("auth");
     console.log("data", data);
+    console.log("sub", JSON.stringify(data));
     // console.log("endpoint", endpoint);
     // console.log("key", key);
     // console.log("auth", auth);
-    fetch("http://localhost:3001/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify(data),
-    });
+    // fetch("https://192.168.31.59:3001/register", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json;charset=utf-8",
+    //   },
+    //   body: JSON.stringify(data),
+    // });
   } catch (err) {
     // The subscription wasn't successful.
     console.log("Error", err);
@@ -49,6 +50,7 @@ async function subscribeToPushMessages() {
 // Utility function for browser interoperability
 function urlBase64ToUint8Array(base64String) {
   var padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  // eslint-disable-next-line
   var base64 = (base64String + padding).replace(/\-/g, "+").replace(/_/g, "/");
 
   var rawData = window.atob(base64);
