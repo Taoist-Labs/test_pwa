@@ -20,22 +20,33 @@ self.addEventListener("push", function (event) {
   const payload = event.data ? event.data.text() : "no payload";
 
   console.log("event: ", event);
-  console.log("payload: ", payload);
+  const data = JSON.parse(payload);
+  console.log("event data: ", data);
+
 
   // Keep the service worker alive until the notification is created.
   event.waitUntil(
     // Show a notification with title 'ServiceWorker Cookbook' and use the payload
     // as the body.
     self.registration.showNotification("ServiceWorker Cookbook", {
-      body: payload,
+      body: data.payload,
+      actions: [
+        {
+          action: "yes",
+          type: "button",
+          title: "👍 Yes",
+        },
+        {
+          action: "no",
+          type: "button",
+          title: "👎 No",
+        },
+      ],
     })
   );
 });
 
-self.addEventListener('notificationclick', function (event) {
-  console.log("event:", event);
-  event.notification.close();
-  event.waitUntil(
-    clients.openWindow('https://baidu.com')
-  );
+self.addEventListener("notificationclick", function (event) {
+  console.log("click event:", event);
+  console.log(`action clicked: '${event?.action}'`);
 });
