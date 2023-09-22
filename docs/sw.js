@@ -31,3 +31,11 @@ self.addEventListener("push", function (event) {
     })
   );
 });
+
+self.addEventListener('notificationclick', function (event) {
+  console.log("event:", event);
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow('https://baidu.com')
+  );
+});
