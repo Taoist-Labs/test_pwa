@@ -20,17 +20,14 @@ self.addEventListener("push", function (event) {
   const payload = event.data ? event.data.text() : "no payload";
 
   console.log("event: ", event);
-  const data = JSON.stringify(payload);
-  console.log("payload: ", data);
+  console.log("payload: ", payload);
 
   // Keep the service worker alive until the notification is created.
   event.waitUntil(
     // Show a notification with title 'ServiceWorker Cookbook' and use the payload
     // as the body.
     self.registration.showNotification("ServiceWorker Cookbook", {
-      body: payload.content,
-      actions: payload.actions,
-      vibrate: [200, 100, 200, 100, 200, 100, 200],
+      body: payload,
     })
   );
 });
