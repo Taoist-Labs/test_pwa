@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import usePushNotifications from "./hooks/usePushNotifications"
 import subscribeToPushMessages from "./utils/subscribe";
-
+import RouterLink from './router';
 
 let deferredPrompt;
 
@@ -38,6 +38,7 @@ function App() {
       <div>
         <button onClick={installApp}>安装</button>
       </div>
+      <RouterLink />
     </div>
   );
 }

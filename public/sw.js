@@ -49,4 +49,5 @@ self.addEventListener("push", function (event) {
 self.addEventListener("notificationclick", function (event) {
   console.log("click event:", event);
   console.log(`action clicked: '${event?.action}'`);
+  clients.openWindow("https://taoist-labs.github.io/test_pwa/#/message");
 });
