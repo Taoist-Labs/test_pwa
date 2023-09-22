@@ -29,9 +29,14 @@ const { publicKey, privateKey } = {
 
 webPush.setVapidDetails("mailto:mmmpolar888@gmail.com", publicKey, privateKey);
 
-const payload = "1233213";
+const payload = JSON.stringify({
+  payload: "Hello World!",
+  actions: [],
+  // tag: "/test_pwa/#/message",  // web上可用但是iOS上无效
+  tag: "https://taoist-labs.github.io/test_pwa/#/message",
+});
 const options = {
   proxy: "http://127.0.0.1:7890",
 };
 
-webPush.sendNotification(sub, payload, options);
+webPush.sendNotification(sub2, payload, options);
