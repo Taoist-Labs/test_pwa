@@ -23,31 +23,18 @@ self.addEventListener("push", function (event) {
   const data = JSON.parse(payload);
   console.log("event data: ", data);
 
-
   // Keep the service worker alive until the notification is created.
   event.waitUntil(
     // Show a notification with title 'ServiceWorker Cookbook' and use the payload
     // as the body.
     self.registration.showNotification("ServiceWorker Cookbook", {
-      body: data.payload,
-      actions: [
-        {
-          action: "yes",
-          type: "button",
-          title: "👍 Yes",
-        },
-        {
-          action: "no",
-          type: "button",
-          title: "👎 No",
-        },
-      ],
+      ...data,
     })
   );
 });
 
 self.addEventListener("notificationclick", function (event) {
   console.log("click event:", event);
-  console.log(`action clicked: '${event?.action}'`);
-  clients.openWindow("https://taoist-labs.github.io/test_pwa/#/message");
+  console.log("notificationt:", event.notification);
+  clients.openWindow(event.notification.tag);
 });
