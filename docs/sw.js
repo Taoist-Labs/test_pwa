@@ -23,6 +23,7 @@ self.addEventListener("push", function (event) {
   const data = JSON.parse(payload);
   console.log("event data: ", data);
 
+
   // Keep the service worker alive until the notification is created.
   event.waitUntil(
     // Show a notification with title 'ServiceWorker Cookbook' and use the payload
