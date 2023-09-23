@@ -27,16 +27,21 @@ export default function Notification() {
   };
 
   const sendPushMessage = (data) => {
-    fetch("https://test-w3g-api.weetopia.io/pwa_push/sendNotification", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        sub,
-        payload: JSON.stringify(data),
-      }),
-    });
+    try {
+      fetch("http://localhost:3001/sendNotification", {
+        // fetch("https://test-w3g-api.weetopia.io/pwa_push/sendNotification", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sub,
+          payload: JSON.stringify(data),
+        }),
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const pushTime = () => {
