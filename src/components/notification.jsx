@@ -95,7 +95,7 @@ export default function Notification() {
               <button onClick={pushTime}>推送当前时间</button>
             </p>
             <p>
-              <button onClick={pushToPage}>推送通知打开message页面</button>
+              <button onClick={pushToPage}>推送message</button>
             </p>
             <p>
               <input type="text" onChange={(e) => setValue(e.target.value)} />
