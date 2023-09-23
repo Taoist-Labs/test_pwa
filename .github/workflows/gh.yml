@@ -29,7 +29,7 @@ jobs:
        uses: crazy-max/ghaction-github-pages@v3
        with:
           target_branch: gh-pages
-          build_dir: ./frontend/build
+          build_dir: ./build
           fqdn: hk.taoist.dev
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
