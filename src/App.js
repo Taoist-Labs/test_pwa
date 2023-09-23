@@ -2,6 +2,12 @@ import React from "react";
 import "./App.css";
 import RouterLink from "./router";
 
+var u = navigator.userAgent,
+  isAndroid = u.indexOf("Android") > -1 || u.indexOf("Adr") > -1,
+  isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+console.log("[isAndroid]:", isAndroid);
+console.log("[isiOS]:", isiOS);
+
 let deferredPrompt;
 
 window.addEventListener("beforeinstallprompt", (e) => {
@@ -23,10 +29,15 @@ function App() {
   };
   return (
     <div className="App">
-      <div>
-        <button onClick={installApp}>安装</button>
-      </div>
-      <hr />
+      {!window.Notification && isAndroid && (
+        <>
+          <div>
+            <button onClick={installApp}>安装</button>
+          </div>
+          <hr />
+        </>
+      )}
+
       <RouterLink />
     </div>
   );
