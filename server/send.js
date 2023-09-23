@@ -10,17 +10,6 @@ const sub = {
   },
 };
 
-const sub1 = {
-  endpoint:
-    "https://fcm.googleapis.com/fcm/send/crUceRSaQMs:APA91bFdAk536Hbno-XzwZERo-3ChKWWY2U8QqQuZ336YYxfntFhVBCTmVXjEI5nISUD8RDwC5vC_HUThMnGxsekm0d-ifD1PEuMVIZyVDgOU3HnwVCEsiBzPfu3Woc3v2-CvDk9MTXB",
-  expirationTime: null,
-  keys: {
-    p256dh:
-      "BGmtTIaxaBQPc6ft7RTfQLttYKdkJEgRx2DSTQyHf-tiyyjHRQ6h3ZVNyb5jffEKdjB29-9MYHYjytXAPg6R-0A",
-    auth: "MBqmt48n-HxWACPAZPVQQw",
-  },
-};
-
 const { publicKey, privateKey } = {
   publicKey:
     "BCxVf3jwF_BUdJSuyZFiDuOjNAZ6Y-mnXrBg-nj8zYa1M-yyBwJ9_F9ZK37X73eCZPFb4o5lr7L2yIaiIaNF0MY",
@@ -39,4 +28,4 @@ const options = {
   proxy: "http://127.0.0.1:7890",
 };
 
-webPush.sendNotification(sub2, payload, options);
+webPush.sendNotification(sub, payload, options);

@@ -27,28 +27,44 @@ export default function Notification() {
   };
 
   const sendPushMessage = (data) => {
-    fetch("", {
+    fetch("https://test-w3g-api.weetopia.io/pwa_push/sendNotification", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         sub,
-        payload: data,
+        payload: JSON.stringify(data),
       }),
     });
   };
 
   const pushTime = () => {
-    sendPushMessage({});
+    sendPushMessage({
+      title: "时间推送",
+      data: {
+        body: "当前时间" + new Date().toLocaleString(),
+      },
+    });
   };
 
   const pushToPage = () => {
-    sendPushMessage({});
+    sendPushMessage({
+      title: "新消息",
+      data: {
+        body: "点击进入message页面",
+        tag: "https://taoist-labs.github.io/test_pwa/#/message",
+      },
+    });
   };
 
   const pushCustom = () => {
-    sendPushMessage({});
+    sendPushMessage({
+      title: "自定义消息",
+      data: {
+        body: value || "未定义",
+      },
+    });
   };
 
   return (

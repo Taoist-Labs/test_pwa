@@ -11,10 +11,13 @@ export default function usePushNotifications() {
     }
 
     const handlePermission = (permission) => {
+      console.log("1-permission: ", permission);
       setPermission(permission);
     };
 
-    Notification.requestPermission().then(handlePermission);
+    Notification.requestPermission()
+      .then(handlePermission)
+      .catch((err) => console.error("1-permission failed", err));
   }, []);
 
   const handlePermission = () => {
