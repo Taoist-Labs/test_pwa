@@ -1,5 +1,5 @@
-import usePushNotifications from "./hooks/usePushNotifications";
-import subscribeToPushMessages from "./utils/subscribe";
+import usePushNotifications from "../hooks/usePushNotifications";
+import subscribeToPushMessages from "../utils/subscribe";
 
 let deferredPrompt;
 
