@@ -1,6 +1,9 @@
 async function subscribeToPushMessages() {
-  console.log("~~~");
-  console.log("~~~111", navigator.serviceWorker);
+  if (!window.navigator || !navigator.serviceWorker) {
+    console.error("not support navigator or serviceWorker");
+    return
+  }
+  console.log("~~~serviceWorker", navigator.serviceWorker);
 
   const serviceWorkerRegistration = await navigator.serviceWorker.ready;
   console.log("~~~serviceWorkerRegistration", serviceWorkerRegistration);
@@ -41,6 +44,7 @@ async function subscribeToPushMessages() {
     //   },
     //   body: JSON.stringify(data),
     // });
+    return data;
   } catch (err) {
     // The subscription wasn't successful.
     console.log("Error", err);

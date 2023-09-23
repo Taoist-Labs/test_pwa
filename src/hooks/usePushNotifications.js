@@ -16,6 +16,7 @@ export default function usePushNotifications() {
     return askPermission()
       .then((res) => {
         console.log("you agreed permission");
+        setPermission("granted");
       })
       .catch((err) => {
         console.error("you denied permission");
