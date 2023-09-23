@@ -5,6 +5,11 @@ export default function usePushNotifications() {
   const [permission, setPermission] = useState("default");
 
   useEffect(() => {
+    if (!window.Notification) {
+      console.error("not support navigator");
+      return;
+    }
+
     const handlePermission = (permission) => {
       setPermission(permission);
     };
