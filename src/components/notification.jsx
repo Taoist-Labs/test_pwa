@@ -5,6 +5,7 @@ import subscribeToPushMessages from "../utils/subscribe";
 export default function Notification() {
   const { permission, handlePermission } = usePushNotifications();
   const [sub, setSub] = useState();
+  const [value, setValue] = useState();
 
   useEffect(() => {
     const data = localStorage.getItem("sub");
@@ -25,6 +26,31 @@ export default function Notification() {
       });
   };
 
+  const sendPushMessage = (data) => {
+    fetch("", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        sub,
+        payload: data,
+      }),
+    });
+  };
+
+  const pushTime = () => {
+    sendPushMessage({});
+  };
+
+  const pushToPage = () => {
+    sendPushMessage({});
+  };
+
+  const pushCustom = () => {
+    sendPushMessage({});
+  };
+
   return (
     <>
       <div>permission: {permission}</div>
@@ -35,24 +61,20 @@ export default function Notification() {
       )}
 
       <div>
-        {sub ? (
-          <span>已订阅</span>
-        ) : (
-          <button onClick={handleSubscribe}>订阅</button>
-        )}
+        {sub ? <span>已订阅</span> : <button onClick={pushTime}>订阅</button>}
       </div>
       <div>
         {sub && (
           <div>
             <p>
-              <button>推送当前时间</button>
+              <button onClick={sendPushMessage}>推送当前时间</button>
             </p>
             <p>
-              <button>推送通知打开message页面</button>
+              <button onClick={pushToPage}>推送通知打开message页面</button>
             </p>
             <p>
-              <input type="text" />
-              <button>推送输入内容</button>
+              <input type="text" onChange={(e) => setValue(e.target.value)} />
+              <button onClick={pushCustom}>推送输入内容</button>
             </p>
           </div>
         )}
