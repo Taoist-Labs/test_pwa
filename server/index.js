@@ -6,9 +6,9 @@ import * as https from "https";
 import {LocalStorage} from "node-localstorage";
 
 
-let p256dh, auth, endpoint;
-
-let sub;
+// let p256dh, auth, endpoint;
+// 
+// let sub;
 
 const initWebPush = (app, route) => {
   app.get(route, function (req, res) {
@@ -18,18 +18,19 @@ const initWebPush = (app, route) => {
     res.send(publicKey);
   });
 
-  app.post(route + "register", function (req, res) {
-    console.log("body: ", req.body);
-    sub = req.body;
-    // endpoint = req.body.endpoint;
-    // p256dh = req.body.p256dh;
-    // auth = req.body.auth;
-    res.status(200).json({
-      msg: `ok,  ${JSON.stringify(sub)}`,
-    });
-  });
+  // app.post(route + "register", function (req, res) {
+  //   console.log("body: ", req.body);
+  //   sub = req.body;
+  //   // endpoint = req.body.endpoint;
+  //   // p256dh = req.body.p256dh;
+  //   // auth = req.body.auth;
+  //   res.status(200).json({
+  //     msg: `ok,  ${JSON.stringify(sub)}`,
+  //   });
+  // });
 
   app.post(route + "sendNotification", function (req, res) {
+    const sub = req.body.sub;
     // sub = req.body;
     // const subscription = req.body.subscription;
     const payload = req.body.payload;
