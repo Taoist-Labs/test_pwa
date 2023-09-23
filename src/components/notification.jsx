@@ -27,10 +27,10 @@ export default function Notification() {
     <>
       <div>permission: {permission}</div>
       <div>
-        <button onClick={handlePermission}>request permission</button>
+        <button onClick={handlePermission}>请求权限</button>
       </div>
       <div>
-        <button onClick={subscribeToPushMessages}>订阅n</button>
+        <button onClick={subscribeToPushMessages}>订阅</button>
       </div>
       <div>
         <button onClick={installApp}>安装</button>
