@@ -1,6 +1,9 @@
 import { UniPassPopupSDK } from "@unipasswallet/popup-sdk";
+import {useState} from "react";
 
 export  default function Unipass(){
+
+    const [account, setAccount] = useState();
 
     const upWallet = new UniPassPopupSDK({
         env: "test",
@@ -26,12 +29,14 @@ export  default function Unipass(){
                 connectType: "both",
             });
             const { address, email } = account;
+            setAccount(address)
             console.log("account", address, email);
         } catch (err) {
             console.log("connect err", err);
         }
     }
     return <div>
+        <div>{account}</div>
         <button onClick={()=>connect()}>unipass</button>
     </div>
 }
