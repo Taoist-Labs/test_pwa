@@ -3,6 +3,7 @@ import { HashRouter as Router,Route, Routes, Navigate } from "react-router-dom";
 import Home from "./home";
 import Login from "./login"
 import MessagePage from "./message";
+import EventHandler from "./components/eventHandler";
 
 
 function RouterLink() {
@@ -15,6 +16,7 @@ function RouterLink() {
                 <Route path="/message" element={<MessagePage />}/>
 
             </Routes>
+            <EventHandler />
         </Router>
 
     );

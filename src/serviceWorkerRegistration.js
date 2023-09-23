@@ -10,6 +10,7 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
 // import sw from "../public/service-worker";
+import PubSub from "pubsub-js";
 
 const isLocalhost = Boolean(
   window.location.hostname === "localhost" ||
@@ -58,6 +59,10 @@ export function register(config) {
       //   // Is not localhost. Just register service worker
       //   registerValidSW(swUrl, config);
       // }
+      navigator.serviceWorker.addEventListener("message", (event) => {
+        console.log('-----listen-----', event.data);
+        PubSub.publish("link-event");
+      });
     });
   }
 }
@@ -148,3 +153,4 @@ export function unregister() {
       });
   }
 }
+
