@@ -11,16 +11,16 @@ export default function usePushNotifications() {
 
     Notification.requestPermission().then(handlePermission);
   }, []);
-    
-    const handlePermission = () => { 
-        askPermission().then((res) => {
-            console.log("you agreed permission");
 
-        }).catch(err => {
-            console.error("you denied permission");
-        })
-    }
-    
+  const handlePermission = () => {
+    return askPermission()
+      .then((res) => {
+        console.log("you agreed permission");
+      })
+      .catch((err) => {
+        console.error("you denied permission");
+      });
+  };
 
   return { handlePermission, permission };
 }
