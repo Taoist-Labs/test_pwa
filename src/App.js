@@ -3,6 +3,7 @@ import './App.css';
 import usePushNotifications from "./hooks/usePushNotifications"
 import subscribeToPushMessages from "./utils/subscribe";
 import RouterLink from './router';
+import { BrowserRouter  } from "react-router-dom";
 
 let deferredPrompt;
 
@@ -12,7 +13,6 @@ window.addEventListener("beforeinstallprompt", (e) => {
 });
 
 function App() {
-  const { permission, handlePermission } = usePushNotifications();
 
   console.log("deferredPrompt:", deferredPrompt);
 
@@ -28,17 +28,14 @@ function App() {
 
   return (
     <div className="App">
-      <div>permission: {permission}</div>
-      <div>
-        <button onClick={handlePermission}>request permission</button>
-      </div>
-      <div>
-        <button onClick={subscribeToPushMessages}>订阅n</button>
-      </div>
-      <div>
-        <button onClick={installApp}>安装</button>
-      </div>
-      <RouterLink />
+
+        <BrowserRouter>
+
+
+            <RouterLink />
+
+        </BrowserRouter>
+
     </div>
   );
 }

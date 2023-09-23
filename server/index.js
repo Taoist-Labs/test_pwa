@@ -3,6 +3,7 @@ import cors from "cors";
 import webPush from "web-push";
 import fs from "fs";
 import * as https from "https";
+import {LocalStorage} from "node-localstorage";
 
 
 let p256dh, auth, endpoint;
@@ -49,7 +50,28 @@ const initWebPush = (app, route) => {
         });
     // }, 1000);
   });
+
+  const LocalData = new LocalStorage('./data');
+  app.post("/connect",function (req, res){
+
+    console.log("body: ", req.body);
+    const{id,address} = req.body;
+    LocalData.setItem(id,address);
+    res.status(200).json({ success:true });
+  });
+
+  app.get("/getAddress",function (req, res){
+    const{id}= req.query;
+    console.log(req.query);
+    let address = LocalData.getItem(id);
+    res.status(200).json({ address });
+  });
 };
+
+
+
+
+
 
 const app = express();
 const port = 3001;
@@ -69,21 +91,21 @@ webPush.setVapidDetails("mailto:mmmpolar888@gmail.com", publicKey, privateKey);
 
 initWebPush(app, "/");
 
-// app.listen(port, () => {
-//   console.log(`app is listening on port ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`app is listening on port ${port}`);
+});
 
 
-var key = fs.readFileSync('server.key');
-var cert = fs.readFileSync('server.crt');
-
-var options = {
-  key: key,
-  cert: cert
-};
+// var key = fs.readFileSync('server.key');
+// var cert = fs.readFileSync('server.crt');
+//
+// var options = {
+//   key: key,
+//   cert: cert
+// };
 // Run static server
 // var https = require('https');
-https.createServer(options, app).listen(3001);
+// https.createServer(options, app).listen(3001);
 
 // app.listen(port, () => {
 //   console.log(`app is listening on port ${port}`);
