@@ -28,8 +28,8 @@ export default function Notification() {
 
   const sendPushMessage = (data) => {
     try {
-      fetch("http://localhost:3001/sendNotification", {
-        // fetch("https://test-w3g-api.weetopia.io/pwa_push/sendNotification", {
+      // fetch("http://localhost:3001/sendNotification", {
+      fetch("https://test-w3g-api.weetopia.io/pwa_push/sendNotification", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
