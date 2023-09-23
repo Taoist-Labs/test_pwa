@@ -61,13 +61,17 @@ export default function Notification() {
       )}
 
       <div>
-        {sub ? <span>已订阅</span> : <button onClick={pushTime}>订阅</button>}
+        {sub ? (
+          <span>已订阅</span>
+        ) : (
+          <button onClick={handleSubscribe}>订阅</button>
+        )}
       </div>
       <div>
         {sub && (
           <div>
             <p>
-              <button onClick={sendPushMessage}>推送当前时间</button>
+              <button onClick={pushTime}>推送当前时间</button>
             </p>
             <p>
               <button onClick={pushToPage}>推送通知打开message页面</button>
