@@ -19,7 +19,7 @@ jobs:
          node-version: '18'
 
      - name: Insall dependencies
-       run: npm install
+       run: npm install --force
      - name: Compile 
        run: export CI=false && npm run build
        
