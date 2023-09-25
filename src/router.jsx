@@ -21,9 +21,11 @@ function RouterLink() {
     ) {
       console.log("isInstalled: true. Already in standalone mode");
       setIsInstalled(true);
+    } else {
+        console.log("isInstalled: false");
+        setIsInstalled(false);
     }
-    console.log("isInstalled: false");
-    setIsInstalled(false);
+    
   }, []);
     
   return (
