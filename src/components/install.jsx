@@ -1,30 +1,47 @@
+import { useEffect, useRef } from "react";
+
 var u = navigator.userAgent,
   isAndroid = u.indexOf("Android") > -1 || u.indexOf("Adr") > -1,
   isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
 console.log("[isAndroid]:", isAndroid);
 console.log("[isiOS]:", isiOS);
 
-let deferredPrompt;
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  console.log("beforeinstallprompt Event fired", e);
-  deferredPrompt = e;
-});
-
 export default function InstallCheck() {
-  console.log("deferredPrompt:", deferredPrompt);
+  const deferredPrompt = useRef();
+
+  const handleBeforeInstallPromptEvent = (event) => {
+    event.preventDefault();
+    deferredPrompt.current = event;
+  };
+
+  useEffect(() => {
+    window.addEventListener(
+      "beforeinstallprompt",
+      handleBeforeInstallPromptEvent
+    );
+    return function cleanup() {
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPromptEvent
+      );
+    };
+  }, []);
 
   const installApp = async () => {
-    console.log("[installApp] deferredPrompt:", deferredPrompt);
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log("[installApp] outcome:", deferredPrompt);
-
-      if (outcome === "accepted") {
-        deferredPrompt = null;
-      }
+    const current = deferredPrompt.current;
+    console.log("[installApp] deferredPrompt:", current);
+    if (!current) {
+      return;
     }
+    current
+      .prompt()
+      .then(() => deferredPrompt.userChoice)
+      .then(({ outcome }) => {
+        console.log("[installApp] outcome:", outcome);
+      })
+      .catch((error) => {
+        console.error("[installApp] error:", error);
+      });
   };
   return (
     <>
