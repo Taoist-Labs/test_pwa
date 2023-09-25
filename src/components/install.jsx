@@ -35,7 +35,7 @@ export default function InstallCheck() {
     }
     current
       .prompt()
-      .then(() => deferredPrompt.userChoice)
+      .then(() => current.userChoice)
       .then(({ outcome }) => {
         console.log("[installApp] outcome:", outcome);
       })
