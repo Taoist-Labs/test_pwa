@@ -29,15 +29,17 @@ function App() {
   };
   return (
     <div className="App">
-      {!window.Notification && isAndroid && (
+      {!window.Notification && <h3>not support notification</h3>}
+      {isAndroid ? (
         <>
           <div>
             <button onClick={installApp}>安装</button>
           </div>
           <hr />
         </>
+      ) : (
+        <h3>iOS 需要添加到主屏幕使用</h3>
       )}
-
       <RouterLink />
     </div>
   );
