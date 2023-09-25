@@ -3,7 +3,6 @@ import { Web3Modal } from '@web3modal/react'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet, polygon, bscTestnet,bsc } from 'wagmi/chains';
 import MyInner from "./components/myInner";
-import {useEthersProvider, useEthersSigner} from "./components/ethersNew";
 
 const chains = [arbitrum, mainnet, polygon,bscTestnet,bsc]
 const projectId = '53f15e1877196c3d22e0d1a3dea1e8e6'
@@ -26,7 +25,14 @@ export default function WC() {
                 <MyInner />
             </WagmiConfig>
 
-            <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+            <Web3Modal projectId={projectId} ethereumClient={ethereumClient}
+                       explorerRecommendedWalletIds={[
+                           'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+                           '80c7742837ad9455049270303bccd55bae39a9e639b70d931191269d3a76320a',
+                           // '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0'
+                       ]}
+                       explorerExcludedWalletIds="ALL"
+            />
         </>
     )
 }
