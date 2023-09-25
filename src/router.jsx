@@ -4,11 +4,13 @@ import Home from "./home";
 import Login from "./login"
 import MessagePage from "./message";
 import EventHandler from "./components/eventHandler";
+import InstallCheck from "./components/install";
 
 
 function RouterLink() {
     return (
         <Router>
+            <InstallCheck />
             <Routes>
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="/home" element={<Home />} />
