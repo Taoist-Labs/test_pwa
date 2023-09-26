@@ -5,17 +5,15 @@ import {
   signMessageCallback,
 } from "@joyid/evm";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 
 function buildRedirectUrl(action) {
-  const url = new URL(`${window.location.origin}/redirect`);
+  const url = new URL(`${window.location.origin}/test_pwa`);
   url.searchParams.set("action", action);
   return url.href;
 }
 
 export default function ConnectJoyid() {
-  const [searchParams] = useSearchParams();
-
   const [isLoading, setIsLoading] = useState(false);
   const [account, setAccount] = useState();
   const [sig, setSig] = useState("");

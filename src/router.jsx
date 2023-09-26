@@ -33,7 +33,7 @@ function RouterLink() {
       {!isInstalled && <InstallCheck />}
 
       <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/" element={<Home />} index />
         <Route path="/home" element={<Home />} />
         <Route path="/login/:id" element={<Login />} />
         <Route path="/message" element={<MessagePage />} />
