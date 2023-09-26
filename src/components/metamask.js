@@ -9,20 +9,41 @@ export  default  function Metamask() {
     const [ethereum,setEthereum] = useState();
     const [account,setAccount] = useState();
     const [rt,setRt] = useState()
-    const [tx,setTx] = useState()
+    const [tx,setTx] = useState();
+    const [canOpenLink,setCanOpenLink] =useState(true);
 
 
     useEffect(() => {
 
         getP()
+
+
+
+        document.addEventListener('visibilitychange',getStatus)
+
+        return () =>{
+            document.removeEventListener('visibilitychange',getStatus);
+        }
+
+
+
     }, []);
+
+
+    const getStatus = () =>{
+        setCanOpenLink(document.visibilityState === "visible");
+    }
+
 
 
     const getP = async() =>{
         const MMSDK = new MetaMaskSDK({
             // useDeeplink:false,
             openDeeplink: (link) => {
-                window.open(link,"_self"); // Use React Native Linking method or another way of opening deeplinks.
+                if(canOpenLink){
+                    window.open(link,"_self");
+                }
+
             },
             // checkInstallationImmediately:true,
             // timer: BackgroundTimer, // To keep the dapp alive once it goes to background.
@@ -97,6 +118,10 @@ export  default  function Metamask() {
 
   return (
       <>
+
+          {
+              JSON.stringify(canOpenLink)
+          }-
           <hr/>
 
           <div>{account}---</div>
