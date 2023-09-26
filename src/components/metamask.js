@@ -77,11 +77,18 @@ export  default  function Metamask() {
 
 
     const sign = async() =>{
+        try{
             const provider = new ethers.providers.Web3Provider(ethereum);
             let sg = await provider.getSigner();
             let rt = await sg.signMessage("12456");
             setRt(rt)
             console.log(rt);
+
+        }
+        catch (e){
+            console.error(e)
+        }
+
 
 
 
@@ -109,16 +116,21 @@ export  default  function Metamask() {
 
     const trans = async() =>{
         console.error("------------start")
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        let signer = await provider.getSigner();
-        const contract = new ethers.Contract(
-            "0xc74dee15a4700d5df797bdd3982ee649a3bb8c6c", Abi.abi,signer,
-        );
+        try{
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            let signer = await provider.getSigner();
+            const contract = new ethers.Contract(
+                "0xc74dee15a4700d5df797bdd3982ee649a3bb8c6c", Abi.abi,signer,
+            );
 
-        const rt = await contract.connect(signer).setX(20);
-        console.log(rt)
-        const aa = await rt.wait();
-        console.log(aa)
+            const rt = await contract.connect(signer).setX(20);
+            console.log(rt)
+            setTx(rt)
+            const aa = await rt.wait();
+            console.log(aa)
+        }catch (e) {
+            console.error(e)
+        }
     }
 
 
@@ -138,7 +150,7 @@ export  default  function Metamask() {
           <button onClick={sign}>sign</button>
 
           <hr/>
-          <div>{tx}</div>
+          <div>{JSON.stringify(tx)}</div>
           <button onClick={trans}>test transaction</button>
 
           <hr/>
