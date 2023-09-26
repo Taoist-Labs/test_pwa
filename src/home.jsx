@@ -3,7 +3,7 @@ import React from "react";
 import Unipass from "./components/unipass2";
 import Notification from "./components/notification";
 // import WalletConnectHome from "./walletConnect";
-import Joyid from "./components/joyid";
+import Joyid from "./components/rjoyid";
 // import NewWallet from "./components/new/newWallet";
 import Metamask from "./components/metamask";
 
@@ -17,7 +17,7 @@ export default function Home(){
         <Unipass />
           {/*<hr/>*/}
           {/*<WalletConnectHome />*/}
-          {/*<hr/>*/}
+          <hr/>
           <Joyid />
 
           <hr/>
