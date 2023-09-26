@@ -51,7 +51,7 @@ export  default  function Metamask() {
 
 
     const sign = async() =>{
-            const provider = new ethers.providers.JsonRpcProvider(ethereum);
+            const provider = new ethers.providers.Web3Provider(ethereum);
             let sg = await provider.getSigner();
             let rt = await sg.signMessage("12456");
             setRt(rt)
