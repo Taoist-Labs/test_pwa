@@ -1,8 +1,8 @@
 import {
-  connect,
-  signMessage,
   connectWithRedirect,
   connectCallback,
+  signMessageWithRedirect,
+  signMessageCallback,
 } from "@joyid/evm";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -22,18 +22,37 @@ export default function ConnectJoyid() {
 
   useEffect(() => {
     const redirectHome = () => {
+      const _address = localStorage.getItem("joyid-address");
+      if (_address) {
+        setAccount(_address);
+        return;
+      }
       let state;
       try {
         state = connectCallback();
         console.log("-------state:", state);
         if (state?.address) {
           setAccount(state.address);
+          localStorage.setItem("joyid-address", state.address);
+          return true;
         }
       } catch (error) {
         console.error("-------callback:", error);
       }
     };
+    const redirectSignMessage = () => {
+      let state;
+      try {
+        state = signMessageCallback();
+        setSig(state.signature);
+        console.log("-------state sign:", state);
+        return true;
+      } catch (error) {
+        console.error("-------callback sign:", error);
+      }
+    };
     redirectHome();
+    redirectSignMessage();
   }, []);
 
   const onConnectRedirect = () => {
@@ -41,29 +60,21 @@ export default function ConnectJoyid() {
     connectWithRedirect(url);
   };
 
-  const onConenctPopup = async () => {
-    setIsLoading(true);
-    try {
-      const address = await connect();
-      setAccount(address);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+  const onSignMessageRedirect = () => {
+    const msg = "Hello World";
+    const url = buildRedirectUrl("sign-message");
+    signMessageWithRedirect(url, msg, account, {
+      state: msg,
+    });
   };
 
-  const signMsg = async () => {
-    const r = await signMessage("Hello World", account);
-    setSig(r);
-  };
   return (
     <div>
       {account ? (
         <div>
           <p>{account}</p>
           <p>
-            <button onClick={signMsg}>sign</button>
+            <button onClick={onSignMessageRedirect}>sign</button>
           </p>
           {sig && (
             <div>
