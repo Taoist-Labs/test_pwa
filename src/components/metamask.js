@@ -1,12 +1,14 @@
 import {MetaMaskSDK} from '@metamask/sdk';
 import {useEffect, useState} from "react";
 import {ethers} from "ethers";
+import Abi from "../abi/Box2.json";
 
 
 export  default  function Metamask() {
     const [ethereum,setEthereum] = useState();
     const [account,setAccount] = useState();
     const [rt,setRt] = useState()
+    const [tx,setTx] = useState()
 
 
     useEffect(() => {
@@ -49,7 +51,7 @@ export  default  function Metamask() {
 
 
     const sign = async() =>{
-            const provider = new ethers.providers.Web3Provider(ethereum);
+            const provider = new ethers.providers.JsonRpcProvider(ethereum);
             let sg = await provider.getSigner();
             let rt = await sg.signMessage("12456");
             setRt(rt)
@@ -79,16 +81,33 @@ export  default  function Metamask() {
         }
     }
 
+    const trans = async() =>{
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        let signer = await provider.getSigner();
+        const contract = new ethers.Contract(
+            "0xc74dee15a4700d5df797bdd3982ee649a3bb8c6c", Abi.abi,signer,
+        );
+
+        const rt = await contract.connect(signer).setX(20);
+        console.log(rt)
+        const aa = await rt.wait();
+        console.log(aa)
+    }
+
   return (
       <>
           <hr/>
 
           <div>{account}---</div>
-          <button onClick={connect}>connect00</button>
+          <button onClick={connect}>connect</button>
 
           <hr/>
           <div>{rt}</div>
           <button onClick={sign}>sign</button>
+
+          <hr/>
+          <div>{tx}</div>
+          <button onClick={trans}>test transaction</button>
 
           <hr/>
           <button onClick={switchChain}>switch</button>
