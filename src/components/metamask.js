@@ -2,6 +2,7 @@ import {MetaMaskSDK} from '@metamask/sdk';
 import {useEffect, useState} from "react";
 import {ethers} from "ethers";
 import Abi from "../abi/Box2.json";
+import '@ethersproject/shims';
 
 
 export  default  function Metamask() {

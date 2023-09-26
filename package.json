@@ -5,6 +5,7 @@
   "homepage": ".",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@ethersproject/shims": "^5.7.0",
     "@joyid/core": "^0.2.0-beta.4",
     "@joyid/evm": "^0.2.0-beta.4",
     "@metamask/sdk": "^0.7.1",
