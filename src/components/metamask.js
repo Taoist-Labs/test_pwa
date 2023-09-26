@@ -45,11 +45,15 @@ export  default  function Metamask() {
                 }
 
             },
+            forceRestartWalletConnect: true,
+            forceInjectProvider: true,
+            forceDeleteProvider: true,
+            enableDebug: true,
             // checkInstallationImmediately:true,
             // timer: BackgroundTimer, // To keep the dapp alive once it goes to background.
             dappMetadata: {
                 name: 'My dapp', // The name of your dapp.
-                url: 'http://192.168.1.4:3000/', // The URL of your website.
+                url: 'http://192.168.1.4:3000', // The URL of your website.
             },
         });
 
@@ -104,6 +108,7 @@ export  default  function Metamask() {
     }
 
     const trans = async() =>{
+        console.error("------------start")
         const provider = new ethers.providers.Web3Provider(ethereum);
         let signer = await provider.getSigner();
         const contract = new ethers.Contract(
@@ -115,6 +120,7 @@ export  default  function Metamask() {
         const aa = await rt.wait();
         console.log(aa)
     }
+
 
   return (
       <>
