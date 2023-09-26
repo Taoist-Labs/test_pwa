@@ -67,7 +67,8 @@ export default function ConnectJoyid() {
   };
 
   return (
-    <div>
+    <section>
+      <h3>JoyID</h3>
       {account ? (
         <div>
           <p>{account}</p>
@@ -77,13 +78,22 @@ export default function ConnectJoyid() {
           {sig && (
             <div>
               <p>sig result:</p>
-              <p>{sig}</p>
+              <p
+                style={{
+                  width: "100%",
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {sig}
+              </p>
             </div>
           )}
         </div>
       ) : (
         <button onClick={onConnectRedirect}>Connect Joyid</button>
       )}
-    </div>
+    </section>
   );
 }

@@ -123,8 +123,8 @@ export  default  function Metamask() {
 
 
   return (
-      <>
-
+      <section>
+          <h3>MetaMask</h3>
           {
               JSON.stringify(canOpenLink)
           }-
@@ -144,7 +144,7 @@ export  default  function Metamask() {
           <hr/>
           <button onClick={switchChain}>switch</button>
 
-      </>
+      </section>
   )
 }
 

@@ -84,11 +84,24 @@ export default function Unipass() {
         setRt(rt)
         console.log(rt);
     }
-    return <div>
+    return (
+      <section>
+        <h3>Unipass</h3>
+
         <div>{addr}</div>
         <button onClick={getW}>unipass</button>
 
-        <div>{rt}</div>
+        <div
+          style={{
+            width: "100%",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {rt}
+        </div>
         <button onClick={signM}>sign message</button>
-    </div>
+      </section>
+    );
 }
