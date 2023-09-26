@@ -48,6 +48,9 @@ export  default  function Metamask() {
             forceRestartWalletConnect: true,
             forceInjectProvider: true,
             forceDeleteProvider: true,
+            checkInstallationImmediately:false,
+            checkInstallationOnAllCalls:false,
+
             enableDebug: true,
             // checkInstallationImmediately:true,
             // timer: BackgroundTimer, // To keep the dapp alive once it goes to background.
