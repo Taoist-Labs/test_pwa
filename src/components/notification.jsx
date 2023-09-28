@@ -58,7 +58,7 @@ export default function Notification() {
       title: "新消息",
       data: {
         body: "点击进入message页面",
-        tag: "https://taoist-labs.github.io/test_pwa/#/message",
+        data: "https://taoist-labs.github.io/test_pwa/#/message",
       },
     });
   };

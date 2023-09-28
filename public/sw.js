@@ -37,15 +37,23 @@ self.addEventListener("push", function (event) {
 self.addEventListener("notificationclick", async function (event) {
   console.log("click event:", event);
   console.log("notificationt:", event.notification);
-  if (event.notification.tag) {
-    const client_arr = await clients.matchAll({
-      type: "window",
-    });
-    console.log("client_arr:", client_arr);
-    if (client_arr.length > 0) {
-      client_arr[0].postMessage("New chat messages!");
-    } else {
-      clients.openWindow(event.notification.tag);
-    }
+  if (event.notification.data) {
+    // const client_arr = await clients.matchAll({
+    //   type: "window",
+    // });
+    // console.log("client_arr:", client_arr);
+    // if (client_arr.length > 0) {
+    //   client_arr[0].postMessage("New chat messages!");
+    // } else {
+    //   clients.openWindow(event.notification.data);
+    // }
+     const promise = new Promise(function (resolve) {
+       setTimeout(resolve, 1000);
+     }).then(function () {
+       // return the promise returned by openWindow, just in case.
+       // Opening any origin only works in Chrome 43+.
+       return clients.openWindow(event.notification.data);
+     });
+    event.waitUntil(promise);
   }
 });
